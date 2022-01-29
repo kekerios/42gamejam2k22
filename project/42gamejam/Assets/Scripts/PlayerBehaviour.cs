@@ -18,14 +18,79 @@ public class PlayerBehaviour : MonoBehaviour
     public PBullet[] iBulletsArray;
     public Transform parentB;
     public int life = 3;
+
+    //Raycast
+    public float distance;
+    public LayerMask bound;
+
+    //Bools Movement
+    private bool canMoveL;
+    private bool canMoveR;
+    private bool canMoveU;
+    private bool canMoveD;
     // Start is called before the first frame update
     void Start()
     {
         //iM = GameObject.FindGameObjectWithTag("InputManager").GetComponent<InputManager>();
         CreateBullets();
         initialSpeed = speed;
-    }
 
+        canMoveL = true;
+        canMoveR = true;
+        canMoveU = true;
+        canMoveD = true;
+    }
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        //Raycast Left
+        Vector2 direction1 = transform.TransformDirection(Vector2.left) * distance;
+        Gizmos.DrawRay(transform.position, direction1);
+        //Raycast Right
+        Vector2 direction2 = transform.TransformDirection(Vector2.right) * distance;
+        Gizmos.DrawRay(transform.position, direction2);
+        //Raycast Up
+        Vector2 direction3 = transform.TransformDirection(Vector2.up) * distance;
+        Gizmos.DrawRay(transform.position, direction3);
+        //Raycast Down
+        Vector2 direction4 = transform.TransformDirection(Vector2.down) * distance;
+        Gizmos.DrawRay(transform.position, direction4);
+    }
+    void FixedUpdate()
+    {
+        Vector2 direction1 = transform.TransformDirection(Vector2.left);
+        RaycastHit2D hit1 = Physics2D.Raycast(transform.position, direction1, distance, bound);
+        Vector2 direction2 = transform.TransformDirection(Vector2.right);
+        RaycastHit2D hit2 = Physics2D.Raycast(transform.position, direction2, distance, bound);
+        Vector2 direction3 = transform.TransformDirection(Vector3.up);
+        RaycastHit2D hit3 = Physics2D.Raycast(transform.position, direction3, distance, bound);
+        Vector2 direction4 = transform.TransformDirection(Vector2.down);
+        RaycastHit2D hit4 = Physics2D.Raycast(transform.position, direction4, distance, bound);
+        if (hit1.collider == null)
+        {
+            //Left
+            canMoveL = false;
+        }
+        else canMoveL = true;
+        if(hit2.collider == null)
+        {
+            //Right
+            canMoveR = false;
+        }
+        else canMoveR = true;
+        if(hit3.collider == null)
+        {
+            //Up
+            canMoveU = false;
+        }
+        else canMoveU = true;
+        if(hit4.collider == null)
+        {
+            //Down
+            canMoveD = false;
+        }
+        else canMoveD = true;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -37,9 +102,14 @@ public class PlayerBehaviour : MonoBehaviour
             //transform.position += move;
             transform.Translate(move, Space.World);
         }
+
     }
     public void Move(Vector3 axis)
     {
+        if(!canMoveL && axis.x < 0) axis.x = 0;
+        if(!canMoveR && axis.x > 0) axis.x = 0;
+        if(!canMoveU && axis.y > 0) axis.y = 0;
+        if(!canMoveD && axis.y < 0) axis.y = 0;
         move = new Vector3 (axis.x, axis.y, 0);
         move = Vector3.ClampMagnitude(move, 1f);
         move = move * speed * Time.deltaTime;

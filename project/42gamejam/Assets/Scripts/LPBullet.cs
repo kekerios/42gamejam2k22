@@ -6,6 +6,7 @@ public class LPBullet : MonoBehaviour
 {
     public bool isRed;
     private bool isMoving = false;
+    private bool canDoDamage = false;
     private Vector3 direction;
     private Vector3 startingPos;
     public float speed = 5;
@@ -21,16 +22,19 @@ public class LPBullet : MonoBehaviour
         if(isMoving)
         {
             transform.position += direction * speed * Time.deltaTime;
+            
         }
     }
     public void Shoot(Vector3 nDirection)
     {
         isMoving = true;
         direction = nDirection;
+        StartCoroutine(ShootDelay());
     }
     private void OnTriggerEnter2D (Collider2D other)
     {
-        if(other.tag == "Enemy")
+        if(!canDoDamage) return;
+        if(other.tag == "Enemy" && canDoDamage)
         {
             //TakeDamage
             Debug.Log("Hit");
@@ -50,5 +54,11 @@ public class LPBullet : MonoBehaviour
         transform.position = startingPos;
         transform.rotation = Quaternion.Euler(new Vector3(0,0,0));
         isMoving = false;
+        canDoDamage = false;
+    }
+    IEnumerator ShootDelay()
+    {
+        yield return new WaitForSeconds(0.2f);
+        canDoDamage = true;
     }
 }

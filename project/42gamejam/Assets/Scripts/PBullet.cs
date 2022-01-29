@@ -45,7 +45,8 @@ public class PBullet : MonoBehaviour
                 lBullet[1].Shoot(new Vector3(-1,0,0));
                 lBullet[1].transform.rotation = Quaternion.Euler(new Vector3(0,0,90));
             }
-            Reset();
+            StartCoroutine(DeadDelay());
+            //Reset();
             //Insanciar mas balas
         }
     }
@@ -75,5 +76,10 @@ public class PBullet : MonoBehaviour
             lBullet[i] = Instantiate(bullet, new Vector3(i,0,0), Quaternion.identity, parentB);
             lBullet[i].transform.localPosition = new Vector3(i,-2,0);
         }
+    }
+    IEnumerator DeadDelay()
+    {
+        yield return new WaitForSeconds(1.5f);
+        Reset();
     }
 }
