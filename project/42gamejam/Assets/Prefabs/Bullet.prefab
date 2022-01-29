@@ -131,6 +131,9 @@ MonoBehaviour:
   isMoving: 0
   damage: 1
   speed: 5
+  lBullet:
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!61 &3268798566765092053
 BoxCollider2D:
   m_ObjectHideFlags: 0
