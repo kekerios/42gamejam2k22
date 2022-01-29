@@ -18,10 +18,6 @@ public class EnemyGeneric : MonoBehaviour
     void Update()
     {
         //                          ENEMY DEATH
-	if(life<=0) 
-		{
-			Death();
-		}
     }
 
 	public void Death()
@@ -33,14 +29,18 @@ public class EnemyGeneric : MonoBehaviour
 
 
 //                                  BULLET COLLIDER
-	protected virtual void OnTriggerEnter2D(Collider2D other)
+	void OnTriggerEnter2D(Collider2D other)
 	{
 	    if (other.tag == "Bullet")
 	    {
 	         //   Debug.Log("Oh no! I have been Shot");
-	            life--;
+	        life--;
+			if(life<=0) 
+			{
+				Death();
+			}
 		}
-	    if (other.tag == "player")
+	    if (other.tag == "Player")
 	    {
 	         //   Debug.Log("Oh no! I have been Shot");
 	            Death();
