@@ -253,10 +253,11 @@ public class PlayerBehaviour : MonoBehaviour
         }
         if(power == "Divide")
         {
-            
+            divideShoot = true;
         }
         if(power == "Life")
         {
+            if(life >= 3) return;
             life += 1;
             speed = initialSpeed;
         }

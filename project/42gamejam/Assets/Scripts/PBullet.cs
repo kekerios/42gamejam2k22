@@ -35,7 +35,7 @@ public class PBullet : MonoBehaviour
         {
             //TakeDamage
             Debug.Log("Hit");
-
+            
             if(divideShoot)
             {
                 lBullet[0].transform.position = transform.position;
@@ -45,7 +45,7 @@ public class PBullet : MonoBehaviour
                 lBullet[1].Shoot(new Vector3(-1,0,0));
                 lBullet[1].transform.rotation = Quaternion.Euler(new Vector3(0,0,90));
             }
-            
+            Reset();
             //Insanciar mas balas
         }
     }
