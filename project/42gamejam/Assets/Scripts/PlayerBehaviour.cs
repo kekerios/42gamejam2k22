@@ -9,8 +9,7 @@ public class PlayerBehaviour : MonoBehaviour
     public float speed = 2.0f;
     public float fireRate = 0.5f;
     private bool canShoot = true;
-    private bool nShoot = true;
-    private bool triShoot = false;
+    public bool triShoot = false;
     public PBullet fBullet;
     public PBullet iBullet;
     public PBullet[] fBulletsArray;
@@ -46,7 +45,7 @@ public class PlayerBehaviour : MonoBehaviour
     }
     public void ShootF()
     {
-        if(nShoot)
+        if(!triShoot)
         {
             NormalShoot();
         }
@@ -99,6 +98,17 @@ public class PlayerBehaviour : MonoBehaviour
             }
         }
     }
+    public void ShootI()
+    {
+        if(!triShoot)
+        {
+            NormalIShoot();
+        }
+        if(triShoot)
+        {
+            TripleIShoot();
+        }
+    }
     public void NormalIShoot()
     {
         if(!canShoot) return;
@@ -128,12 +138,12 @@ public class PlayerBehaviour : MonoBehaviour
                 iBulletsArray[i].isMoving = true;
                 canShoot = false;
                 i++;
-                BulletsArray[i].transform.position = transform.position;
+                iBulletsArray[i].transform.position = transform.position;
                 iBulletsArray[i].Shoot(new Vector3(0.5f, 1, 0));
                 iBulletsArray[i].isMoving = true;
                 canShoot = false;
                 i++;
-                BulletsArray[i].transform.position = transform.position;
+                iBulletsArray[i].transform.position = transform.position;
                 iBulletsArray[i].Shoot(new Vector3(-0.5f, 1, 0));
                 iBulletsArray[i].isMoving = true;
                 canShoot = false;
