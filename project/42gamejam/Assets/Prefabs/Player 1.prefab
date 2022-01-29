@@ -45,6 +45,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 4
+  fireRate: 0.5
+  fBullet: {fileID: 733335232872118000, guid: e4b8f657bbbe8499abd60dac15e3efbb, type: 3}
+  iBullet: {fileID: 0}
+  fBulletsArray:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  iBulletsArray:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  parentB: {fileID: 0}
+  life: 3
 --- !u!1 &2841235702622438909
 GameObject:
   m_ObjectHideFlags: 0
