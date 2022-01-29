@@ -1801,6 +1801,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 3345575164082022736, guid: b74249b3b70f945a9a296974e776dcff, type: 3}
+      propertyPath: m_Size.x
+      value: 9.154091
+      objectReference: {fileID: 0}
+    - target: {fileID: 3345575164082022736, guid: b74249b3b70f945a9a296974e776dcff, type: 3}
+      propertyPath: m_Size.y
+      value: 9.252224
+      objectReference: {fileID: 0}
+    - target: {fileID: 3345575164082022736, guid: b74249b3b70f945a9a296974e776dcff, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.34347153
+      objectReference: {fileID: 0}
+    - target: {fileID: 3345575164082022736, guid: b74249b3b70f945a9a296974e776dcff, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.7850771
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b74249b3b70f945a9a296974e776dcff, type: 3}
 --- !u!1 &1630011774 stripped

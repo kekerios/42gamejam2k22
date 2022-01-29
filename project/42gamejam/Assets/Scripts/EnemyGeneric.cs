@@ -30,15 +30,21 @@ public class EnemyGeneric : MonoBehaviour
 	    Debug.Log("Oh no! I have Died!");
 		Destroy(gameObject);
 	}
-}
+
 
 //                                  BULLET COLLIDER
-/*protected virtual void OnTriggerEnter2D(Collider2D other)
-{
-    if (other.tag == "Bullet")
-    {
-         //   Debug.Log("Oh no! I have been Shot");
-            life--;
-    }
+	protected virtual void OnTriggerEnter2D(Collider2D other)
+	{
+	    if (other.tag == "Bullet")
+	    {
+	         //   Debug.Log("Oh no! I have been Shot");
+	            life--;
+		}
+	    if (other.tag == "player")
+	    {
+	         //   Debug.Log("Oh no! I have been Shot");
+	            Death();
+	    }
 
-}*/
+	}
+}
