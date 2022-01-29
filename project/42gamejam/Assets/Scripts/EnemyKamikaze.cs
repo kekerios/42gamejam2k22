@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Collections;
 
 
 public class EnemyKamikaze : EnemyGeneric
 {
 	private GameObject playerObject;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -24,14 +24,10 @@ public class EnemyKamikaze : EnemyGeneric
 		}
     }
 
-}
 
-//                                  BULLET COLLIDER
-private void OnTriggerEnter2D(Collider2D other)
-{
     void Movement()
 	{
-        transform.position = Vector2.MoveTowards(playerObject.transform.position,Time.deltaTime*speed);
+        transform.position = playerObject.transform.position * speed * Time.deltaTime;
     }
-
+//                                  BULLET COLLIDER
 }

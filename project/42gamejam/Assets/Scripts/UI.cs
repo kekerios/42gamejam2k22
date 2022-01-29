@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 
 public class UI : MonoBehaviour
 {
-	int viewPauseMenu = 0;    
 	private GameObject pausePanel;	
 
 
@@ -15,7 +14,8 @@ public class UI : MonoBehaviour
     void Start()
     {
 		pausePanel = GameObject.FindGameObjectWithTag("pausePanel");
-    }
+		pausePanel.SetActive(false);
+	}
 
     // Update is called once per frame
     void Update()
@@ -24,25 +24,16 @@ public class UI : MonoBehaviour
 		{
 			showPauseMenu();
 		}	
-	
-		if (viewPauseMenu == 1)
-		{
-			pausePanel.SetActive(true);
-		}		
-		else if (viewPauseMenu == 0)
-		{
-			pausePanel.SetActive(false);
-		}
-    }
+	}
 
 	public void showPauseMenu()
 	{
-		viewPauseMenu = 1;
+		pausePanel.SetActive(true);	
 	}
 
 	public void hidePauseMenu()
 	{
-		viewPauseMenu = 0;
+		pausePanel.SetActive(false);
 	}
 
 	public void loadMainMenu()

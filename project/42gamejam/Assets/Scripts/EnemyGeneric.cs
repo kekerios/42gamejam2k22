@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Collections;
 
 
 public class EnemyGeneric : MonoBehaviour
@@ -18,24 +17,23 @@ public class EnemyGeneric : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		Movement();
         //                          ENEMY DEATH
-		if(life<=0) 
+	if(life<=0) 
 		{
 			Death();
 		}
     }
 
-	void Death()
+	public void Death()
 	{
     //                              ENEMY DEATH
-    //Debug.Log("Oh no! I have Died!");
+	    Debug.Log("Oh no! I have Died!");
 		Destroy(gameObject);
 	}
 }
 
 //                                  BULLET COLLIDER
-private void OnTriggerEnter2D(Collider2D other)
+/*protected virtual void OnTriggerEnter2D(Collider2D other)
 {
     if (other.tag == "Bullet")
     {
@@ -43,9 +41,4 @@ private void OnTriggerEnter2D(Collider2D other)
             life--;
     }
 
-    void Movement()
-	{
-        //transform.position = Vector2.MoveTowards(transform.position,Time.deltaTime*speed);
-    }
-
-}
+}*/
