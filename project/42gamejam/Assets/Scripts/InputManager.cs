@@ -18,11 +18,11 @@ public class InputManager : MonoBehaviour
     {
         if(Input.GetButton("Fire1"))
         {
-            player.NormalShoot();
+            player.ShootF();
         }
         if(Input.GetButton("Fire2"))
         {
-            player.NormalIShoot();
+            player.ShootI();
         }
         if(Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
         {
