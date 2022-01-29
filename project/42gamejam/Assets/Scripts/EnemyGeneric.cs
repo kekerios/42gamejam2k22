@@ -6,7 +6,7 @@ using UnityEngine;
 public class EnemyGeneric : MonoBehaviour
 {
     public int life;
-    public int speed;
+    public float speed;
 
     // Start is called before the first frame update
     void Awake()
