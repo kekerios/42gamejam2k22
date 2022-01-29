@@ -9,6 +9,8 @@ public class PlayerBehaviour : MonoBehaviour
     public float speed = 2.0f;
     public float fireRate = 0.5f;
     private bool canShoot = true;
+    private bool nShoot = true;
+    private bool triShoot = false;
     public PBullet fBullet;
     public PBullet iBullet;
     public PBullet[] fBulletsArray;
@@ -42,7 +44,18 @@ public class PlayerBehaviour : MonoBehaviour
         //transform.position += move;
         transform.Translate(move, Space.World);
     }
-    public void NormalShoot()
+    public void ShootF()
+    {
+        if(nShoot)
+        {
+            NormalShoot();
+        }
+        if(triShoot)
+        {
+            TripleShoot();
+        }
+    }
+    private void NormalShoot()
     {
         if(!canShoot) return;
         for(int i = 0; i < fBulletsArray.Length; i++)
@@ -51,6 +64,33 @@ public class PlayerBehaviour : MonoBehaviour
             {
                 fBulletsArray[i].transform.position = transform.position;
                 fBulletsArray[i].Shoot(new Vector3(0, 1, 0));
+                fBulletsArray[i].isMoving = true;
+                canShoot = false;
+                StartCoroutine(ShootDelay());
+                Debug.Log("Shooting");
+                return;
+            }
+        }
+    }
+    private void TripleShoot()
+    {
+        if(!canShoot) return;
+        for(int i = 0; i < fBulletsArray.Length; i++)
+        {
+            if(!fBulletsArray[i].isMoving)
+            {
+                fBulletsArray[i].transform.position = transform.position;
+                fBulletsArray[i].Shoot(new Vector3(0, 1, 0));
+                fBulletsArray[i].isMoving = true;
+                canShoot = false;
+                i++;
+                fBulletsArray[i].transform.position = transform.position;
+                fBulletsArray[i].Shoot(new Vector3(0.5f, 1, 0));
+                fBulletsArray[i].isMoving = true;
+                canShoot = false;
+                i++;
+                fBulletsArray[i].transform.position = transform.position;
+                fBulletsArray[i].Shoot(new Vector3(-0.5f, 1, 0));
                 fBulletsArray[i].isMoving = true;
                 canShoot = false;
                 StartCoroutine(ShootDelay());
@@ -68,6 +108,33 @@ public class PlayerBehaviour : MonoBehaviour
             {
                 iBulletsArray[i].transform.position = transform.position;
                 iBulletsArray[i].Shoot(new Vector3(0, 1, 0));
+                iBulletsArray[i].isMoving = true;
+                canShoot = false;
+                StartCoroutine(ShootDelay());
+                Debug.Log("Shooting");
+                return;
+            }
+        }
+    }
+    public void TripleIShoot()
+    {
+        if(!canShoot) return;
+        for(int i = 0; i < iBulletsArray.Length; i++)
+        {
+            if(!iBulletsArray[i].isMoving)
+            {
+                iBulletsArray[i].transform.position = transform.position;
+                iBulletsArray[i].Shoot(new Vector3(0, 1, 0));
+                iBulletsArray[i].isMoving = true;
+                canShoot = false;
+                i++;
+                BulletsArray[i].transform.position = transform.position;
+                iBulletsArray[i].Shoot(new Vector3(0.5f, 1, 0));
+                iBulletsArray[i].isMoving = true;
+                canShoot = false;
+                i++;
+                BulletsArray[i].transform.position = transform.position;
+                iBulletsArray[i].Shoot(new Vector3(-0.5f, 1, 0));
                 iBulletsArray[i].isMoving = true;
                 canShoot = false;
                 StartCoroutine(ShootDelay());
