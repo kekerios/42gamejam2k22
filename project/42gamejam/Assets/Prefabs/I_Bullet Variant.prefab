@@ -7,6 +7,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1690931558256830313, guid: ccf3732df0ea74cf8926b846eeaa29ff, type: 3}
+      propertyPath: bullet
+      value: 
+      objectReference: {fileID: 2423990900959023520, guid: c69f18611acce4a419cd6bfe5ef0b7cf, type: 3}
+    - target: {fileID: 1690931558256830313, guid: ccf3732df0ea74cf8926b846eeaa29ff, type: 3}
+      propertyPath: lBullet.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1690931558256830313, guid: ccf3732df0ea74cf8926b846eeaa29ff, type: 3}
+      propertyPath: lBullet.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4835671753336976427, guid: ccf3732df0ea74cf8926b846eeaa29ff, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -53,7 +65,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5156786311466770508, guid: ccf3732df0ea74cf8926b846eeaa29ff, type: 3}
       propertyPath: m_Name
-      value: I_Bullet
+      value: I_Bullet Variant
       objectReference: {fileID: 0}
     - target: {fileID: 9067565810338186650, guid: ccf3732df0ea74cf8926b846eeaa29ff, type: 3}
       propertyPath: m_Color.b

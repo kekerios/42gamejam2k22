@@ -6,10 +6,12 @@ public class PlayerBehaviour : MonoBehaviour
 {
     //private InputManager iM;
     private Vector3 move;
+    private float initialSpeed;
     public float speed = 2.0f;
     public float fireRate = 0.5f;
     private bool canShoot = true;
     public bool triShoot = false;
+    public bool divideShoot = false;
     public PBullet fBullet;
     public PBullet iBullet;
     public PBullet[] fBulletsArray;
@@ -21,6 +23,7 @@ public class PlayerBehaviour : MonoBehaviour
     {
         //iM = GameObject.FindGameObjectWithTag("InputManager").GetComponent<InputManager>();
         CreateBullets();
+        initialSpeed = speed;
     }
 
     // Update is called once per frame
@@ -62,8 +65,12 @@ public class PlayerBehaviour : MonoBehaviour
             if(!fBulletsArray[i].isMoving)
             {
                 fBulletsArray[i].transform.position = transform.position;
-                fBulletsArray[i].Shoot(new Vector3(0, 1, 0));
+                fBulletsArray[i].Shoot(new Vector3(0, 1, 0), 0f);
                 fBulletsArray[i].isMoving = true;
+                if(divideShoot)
+                {
+                    fBulletsArray[i].divideShoot = true;
+                }
                 canShoot = false;
                 StartCoroutine(ShootDelay());
                 Debug.Log("Shooting");
@@ -79,23 +86,43 @@ public class PlayerBehaviour : MonoBehaviour
             if(!fBulletsArray[i].isMoving)
             {
                 fBulletsArray[i].transform.position = transform.position;
-                fBulletsArray[i].Shoot(new Vector3(0, 1, 0));
+                fBulletsArray[i].Shoot(new Vector3(0, 1, 0), 0f);
                 fBulletsArray[i].isMoving = true;
-                canShoot = false;
-                i++;
+                if(divideShoot)
+                {
+                    fBulletsArray[i].divideShoot = true;
+                }
+
+                while(fBulletsArray[i].isMoving)
+                {
+                    i++;
+                }
                 fBulletsArray[i].transform.position = transform.position;
-                fBulletsArray[i].Shoot(new Vector3(0.5f, 1, 0));
+                fBulletsArray[i].Shoot(new Vector3(0.5f, 1, 0), -10f);
                 fBulletsArray[i].isMoving = true;
-                canShoot = false;
-                i++;
+                if(divideShoot)
+                {
+                    fBulletsArray[i].divideShoot = true;
+                }
+
+                while(fBulletsArray[i].isMoving)
+                {
+                    i++;
+                }
                 fBulletsArray[i].transform.position = transform.position;
-                fBulletsArray[i].Shoot(new Vector3(-0.5f, 1, 0));
+                fBulletsArray[i].Shoot(new Vector3(-0.5f, 1, 0), 10f);
                 fBulletsArray[i].isMoving = true;
+                if(divideShoot)
+                {
+                    fBulletsArray[i].divideShoot = true;
+                }
                 canShoot = false;
+
                 StartCoroutine(ShootDelay());
                 Debug.Log("Shooting");
                 return;
             }
+            else i++;
         }
     }
     public void ShootI()
@@ -117,8 +144,12 @@ public class PlayerBehaviour : MonoBehaviour
             if(!iBulletsArray[i].isMoving)
             {
                 iBulletsArray[i].transform.position = transform.position;
-                iBulletsArray[i].Shoot(new Vector3(0, 1, 0));
+                iBulletsArray[i].Shoot(new Vector3(0, 1, 0), 0f);
                 iBulletsArray[i].isMoving = true;
+                if(divideShoot)
+                {
+                    iBulletsArray[i].divideShoot = true;
+                }
                 canShoot = false;
                 StartCoroutine(ShootDelay());
                 Debug.Log("Shooting");
@@ -134,23 +165,44 @@ public class PlayerBehaviour : MonoBehaviour
             if(!iBulletsArray[i].isMoving)
             {
                 iBulletsArray[i].transform.position = transform.position;
-                iBulletsArray[i].Shoot(new Vector3(0, 1, 0));
+                iBulletsArray[i].Shoot(new Vector3(0, 1, 0), 0f);
                 iBulletsArray[i].isMoving = true;
-                canShoot = false;
-                i++;
+                if(divideShoot)
+                {
+                    iBulletsArray[i].divideShoot = true;
+                }
+
+                while(iBulletsArray[i].isMoving)
+                {
+                    i++;
+                }
                 iBulletsArray[i].transform.position = transform.position;
-                iBulletsArray[i].Shoot(new Vector3(0.5f, 1, 0));
+                iBulletsArray[i].Shoot(new Vector3(0.5f, 1, 0), -10f);
                 iBulletsArray[i].isMoving = true;
-                canShoot = false;
-                i++;
+                if(divideShoot)
+                {
+                    iBulletsArray[i].divideShoot = true;
+                }
+
+                while(iBulletsArray[i].isMoving)
+                {
+                    i++;
+                }
                 iBulletsArray[i].transform.position = transform.position;
-                iBulletsArray[i].Shoot(new Vector3(-0.5f, 1, 0));
+                iBulletsArray[i].Shoot(new Vector3(-0.5f, 1, 0), 10f);
                 iBulletsArray[i].isMoving = true;
+                if(divideShoot)
+                {
+                    iBulletsArray[i].divideShoot = true;
+                }
+
                 canShoot = false;
+
                 StartCoroutine(ShootDelay());
                 Debug.Log("Shooting");
                 return;
             }
+            //else i++;
         }
     }
     private void CreateBullets()
@@ -192,5 +244,21 @@ public class PlayerBehaviour : MonoBehaviour
     {
         yield return new WaitForSeconds(fireRate);
         canShoot = true;
+    }
+    public void GetPowerUp(string power)
+    {
+        if(power == "Triple")
+        {
+            triShoot = true;
+        }
+        if(power == "Divide")
+        {
+            
+        }
+        if(power == "Life")
+        {
+            life += 1;
+            speed = initialSpeed;
+        }
     }
 }
