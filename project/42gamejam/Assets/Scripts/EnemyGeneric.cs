@@ -11,7 +11,7 @@ public class EnemyGeneric : MonoBehaviour
     protected Vector3 startingPos;
     public bool isSpawning;
 	public bool isWhite;
-	protected bool dead = false;
+	public bool dead = false;
     //                               ENEMY SHOOTING
     // public EnBullet bullet;
     // public EnBullet[] EnBullet;
@@ -59,6 +59,7 @@ public class EnemyGeneric : MonoBehaviour
 	    {
 	         //   Debug.Log("Oh no! I have been Shot");
 	            Death();
+				other.GetComponent<PlayerBehaviour>().ReceiveDamage();
 	    }
 
 	}

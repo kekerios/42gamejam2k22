@@ -14,6 +14,10 @@ public class PBullet : MonoBehaviour
     public LPBullet bullet;
     public LPBullet[] lBullet;
     private Transform parentB;
+
+    public GameObject triPower;
+    public GameObject divPower;
+    public GameObject lifeUp;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,7 +39,21 @@ public class PBullet : MonoBehaviour
         {
             //TakeDamage
             Debug.Log("Hit");
+            int toSpawn = Random.Range(1, 20);
+            if(toSpawn == 1)
+            {
+                Instantiate(triPower, other.transform.position, Quaternion.identity);
+            }
+            else if(toSpawn == 2)
+            {
+                Instantiate(divPower, other.transform.position, Quaternion.identity);
+            }
+            else if(toSpawn == 3)
+            {
+                Instantiate(lifeUp, other.transform.position, Quaternion.identity);
+            }
             other.GetComponent<EnemyGeneric>().Death();
+
             if(divideShoot)
             {
                 lBullet[0].transform.position = transform.position;
