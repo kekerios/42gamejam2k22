@@ -8,6 +8,7 @@ TagManager:
   - Bullet
   - pausePanel
   - Bound
+  - Bound_Enemy
   layers:
   - Default
   - TransparentFX

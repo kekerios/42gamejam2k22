@@ -6,18 +6,20 @@ using UnityEngine;
 public class EnemyGeneric : MonoBehaviour
 {
     public int life;
+	private int startingLife;
     public float speed;
-      private Vector3 startingPos;
-    bool isSpawning;
+    private Vector3 startingPos;
+    public bool isSpawning;
+	public bool isWhite;
     //                               ENEMY SHOOTING
     // public EnBullet bullet;
     // public EnBullet[] EnBullet;
-    private Transform parentE;
     // Start is called before the first frame update
     void Start()
     {
-        startingPos = transform.position;
-        parentE = transform.parent;
+        startingPos = transform.localPosition;
+		startingLife = life;
+		isSpawning = false;
         //CreateBullets();
     }
 
@@ -32,8 +34,9 @@ public class EnemyGeneric : MonoBehaviour
 	{
     //                              ENEMY DEATH
 	    Debug.Log("Oh no! I have Died!");
-		transform.position = startingPos;
+		transform.localPosition = startingPos;
         transform.rotation = Quaternion.Euler(new Vector3(0,0,0));
+		life = startingLife;
         isSpawning = false;
 	}
 

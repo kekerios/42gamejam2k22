@@ -18,14 +18,20 @@ public class EnemyKamikaze : EnemyGeneric
     // Update is called once per frame
     void Update()
     {
-		target = playerObject.transform.position;
-		float step = speed * Time.deltaTime;
-		transform.position = Vector2.MoveTowards(transform.position, target, step); 
-        //                          ENEMY DEATH
-		if(life<=0) 
+		if(!isSpawning)return;
+		else
 		{
-			Death();
+			target = playerObject.transform.position;
+			float step = speed * Time.deltaTime;
+			transform.position = Vector2.MoveTowards(transform.position, target, step); 
+			//                          ENEMY DEATH
+			if(life<=0) 
+			{
+				Death();
+				return;
+			}
 		}
+		
     }
 
 
