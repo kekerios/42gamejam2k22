@@ -120,6 +120,7 @@ public class enemySpawnerScript : MonoBehaviour
                 enemyArray[i].transform.position = transform.position;
                 enemyArray[i].isSpawning = true;
                 enemyArray[i].life = 1;
+                enemyArray[i].dead = false;
                 canSpawn = false;
                 StartCoroutine(SpawnDelay());
                 return;

@@ -12,6 +12,18 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2423990900959023520, guid: c69f18611acce4a419cd6bfe5ef0b7cf, type: 3}
     - target: {fileID: 1690931558256830313, guid: ccf3732df0ea74cf8926b846eeaa29ff, type: 3}
+      propertyPath: lifeUp
+      value: 
+      objectReference: {fileID: 7636201781009772060, guid: 05251b1b6eee2400ba84415aa41eb975, type: 3}
+    - target: {fileID: 1690931558256830313, guid: ccf3732df0ea74cf8926b846eeaa29ff, type: 3}
+      propertyPath: divPower
+      value: 
+      objectReference: {fileID: 1162990315877240320, guid: b0c3f4a95969f4269bb1e014b2f361c7, type: 3}
+    - target: {fileID: 1690931558256830313, guid: ccf3732df0ea74cf8926b846eeaa29ff, type: 3}
+      propertyPath: triPower
+      value: 
+      objectReference: {fileID: 2613768093747865016, guid: 6feb2c7eacdf74f9896c4b622839d322, type: 3}
+    - target: {fileID: 1690931558256830313, guid: ccf3732df0ea74cf8926b846eeaa29ff, type: 3}
       propertyPath: lBullet.Array.data[0]
       value: 
       objectReference: {fileID: 0}
