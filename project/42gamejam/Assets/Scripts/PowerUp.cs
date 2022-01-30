@@ -36,6 +36,7 @@ public class PowerUp : MonoBehaviour
             {
                 player.GetPowerUp("Life");
             }
+            Destroy(gameObject);
         }
     }
 }
