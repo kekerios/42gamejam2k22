@@ -10,14 +10,15 @@ public class PlayerBehaviour : MonoBehaviour
     public float speed = 2.0f;
     public float fireRate = 0.5f;
     private bool canShoot = true;
-    public bool triShoot = false;
-    public bool divideShoot = false;
+    private bool triShoot = false;
+    private bool divideShoot = false;
     public PBullet fBullet;
     public PBullet iBullet;
     public PBullet[] fBulletsArray;
     public PBullet[] iBulletsArray;
     public Transform parentB;
-    public int life = 3;
+    private Animator animator;
+    private int life = 3;
 
     //Raycast
     public float distance;
@@ -32,6 +33,7 @@ public class PlayerBehaviour : MonoBehaviour
     void Start()
     {
         //iM = GameObject.FindGameObjectWithTag("InputManager").GetComponent<InputManager>();
+        animator = GetComponentInChildren<Animator>();
         CreateBullets();
         initialSpeed = speed;
 
@@ -46,15 +48,25 @@ public class PlayerBehaviour : MonoBehaviour
         //Raycast Left
         Vector2 direction1 = transform.TransformDirection(Vector2.left) * distance;
         Gizmos.DrawRay(transform.position, direction1);
+        Vector2 direction10 = transform.TransformDirection(new Vector2(-1,1) * distance);
+        Gizmos.DrawRay(transform.position, direction10);
         //Raycast Right
         Vector2 direction2 = transform.TransformDirection(Vector2.right) * distance;
         Gizmos.DrawRay(transform.position, direction2);
+        Vector2 direction20 = transform.TransformDirection(new Vector2(1,1) * distance);
+        Gizmos.DrawRay(transform.position, direction20);
         //Raycast Up
         Vector2 direction3 = transform.TransformDirection(Vector2.up) * distance;
         Gizmos.DrawRay(transform.position, direction3);
+        
         //Raycast Down
         Vector2 direction4 = transform.TransformDirection(Vector2.down) * distance;
         Gizmos.DrawRay(transform.position, direction4);
+        Vector2 direction40 = transform.TransformDirection(new Vector2(1,-1) * distance);
+        Gizmos.DrawRay(transform.position, direction40);
+        //leftdown
+        Vector2 direction30 = transform.TransformDirection(new Vector2(-1,-1) * distance);
+        Gizmos.DrawRay(transform.position, direction30);
     }
     void FixedUpdate()
     {
@@ -66,25 +78,34 @@ public class PlayerBehaviour : MonoBehaviour
         RaycastHit2D hit3 = Physics2D.Raycast(transform.position, direction3, distance, bound);
         Vector2 direction4 = transform.TransformDirection(Vector2.down);
         RaycastHit2D hit4 = Physics2D.Raycast(transform.position, direction4, distance, bound);
-        if (hit1.collider == null)
+
+        Vector2 direction10 = transform.TransformDirection(new Vector2(-1,1));
+        RaycastHit2D hit10 = Physics2D.Raycast(transform.position, direction10, distance, bound);
+        Vector2 direction20 = transform.TransformDirection(new Vector2(1,1));
+        RaycastHit2D hit20 = Physics2D.Raycast(transform.position, direction20, distance, bound);
+        Vector2 direction30 = transform.TransformDirection(new Vector2(-1,-1));
+        RaycastHit2D hit30 = Physics2D.Raycast(transform.position, direction30, distance, bound);
+        Vector2 direction40 = transform.TransformDirection(new Vector2(1,-1));
+        RaycastHit2D hit40 = Physics2D.Raycast(transform.position, direction40, distance, bound);
+        if (hit1.collider == null && hit10.collider == null && hit30.collider == null)
         {
             //Left
             canMoveL = false;
         }
         else canMoveL = true;
-        if(hit2.collider == null)
+        if(hit2.collider == null && hit20.collider == null && hit40.collider == null)
         {
             //Right
             canMoveR = false;
         }
         else canMoveR = true;
-        if(hit3.collider == null)
+        if(hit3.collider == null && hit10.collider == null && hit20.collider ==null)
         {
             //Up
             canMoveU = false;
         }
         else canMoveU = true;
-        if(hit4.collider == null)
+        if(hit4.collider == null && hit30.collider == null && hit40.collider == null)
         {
             //Down
             canMoveD = false;
@@ -288,7 +309,7 @@ public class PlayerBehaviour : MonoBehaviour
             iBulletsArray[i].transform.localPosition = new Vector3(i,-1,0);
         }
     }
-    private void ReceiveDamage()
+    public void ReceiveDamage()
     {
         life -= 1;
         if(life == 2)
@@ -297,11 +318,13 @@ public class PlayerBehaviour : MonoBehaviour
             /*move = new Vector3 (axis.x, 0, 0);
             move = move * speed/3 * Time.deltaTime;
             transform.position += move;*/
+            animator.SetTrigger("Hurt");
         }
         else if(life == 1)
         {
             //lose two wings;
             speed /= 1.5f;
+            animator.SetTrigger("Wingless");
         }
         else Die();
     }
@@ -327,9 +350,14 @@ public class PlayerBehaviour : MonoBehaviour
         }
         if(power == "Life")
         {
-            if(life >= 3) return;
+            if(life >= 3) 
+            {
+                animator.SetTrigger("Full");
+                return;
+            }
             life += 1;
             speed = initialSpeed;
+
         }
     }
 }
