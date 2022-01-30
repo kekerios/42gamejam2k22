@@ -27,14 +27,17 @@ public class PowerUp : MonoBehaviour
             if(tripleShoot)
             {
                 player.GetPowerUp("Triple");
+				SoundManager.PlaySound("Powerup2");
             }
             if(divideShoot)
             {
                 player.GetPowerUp("Divide");
+				SoundManager.PlaySound("Powerup3");
             }
             if(life)
             {
                 player.GetPowerUp("Life");
+				SoundManager.PlaySound("Powerup1");
             }
             Destroy(gameObject);
         }
