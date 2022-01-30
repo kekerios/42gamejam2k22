@@ -29,9 +29,11 @@ public class PlayerBehaviour : MonoBehaviour
     private bool canMoveR;
     private bool canMoveU;
     private bool canMoveD;
+    public GameObject deadScreen;
     // Start is called before the first frame update
     void Start()
     {
+        deadScreen.SetActive(false);
         //iM = GameObject.FindGameObjectWithTag("InputManager").GetComponent<InputManager>();
         animator = GetComponentInChildren<Animator>();
         CreateBullets();
@@ -332,6 +334,8 @@ public class PlayerBehaviour : MonoBehaviour
     {
         speed = 0;
         canShoot = false;
+        deadScreen.SetActive(true);
+        gameObject.SetActive(false);
     }
     IEnumerator ShootDelay()
     {
@@ -357,7 +361,6 @@ public class PlayerBehaviour : MonoBehaviour
             }
             life += 1;
             speed = initialSpeed;
-
         }
     }
 }
