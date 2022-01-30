@@ -153,6 +153,7 @@ public class PlayerBehaviour : MonoBehaviour
     private void NormalShoot()
     {
         if(!canShoot) return;
+		SoundManager.PlaySound("Shot2");
         for(int i = 0; i < fBulletsArray.Length; i++)
         {
             if(!fBulletsArray[i].isMoving)
@@ -174,6 +175,7 @@ public class PlayerBehaviour : MonoBehaviour
     private void TripleShoot()
     {
         if(!canShoot) return;
+		SoundManager.PlaySound("Shot2");
         for(int i = 0; i < fBulletsArray.Length; i++)
         {
             if(!fBulletsArray[i].isMoving)
@@ -232,6 +234,7 @@ public class PlayerBehaviour : MonoBehaviour
     public void NormalIShoot()
     {
         if(!canShoot) return;
+		SoundManager.PlaySound("Shot1");
         for(int i = 0; i < iBulletsArray.Length; i++)
         {
             if(!iBulletsArray[i].isMoving)
@@ -253,6 +256,7 @@ public class PlayerBehaviour : MonoBehaviour
     public void TripleIShoot()
     {
         if(!canShoot) return;
+		SoundManager.PlaySound("Shot1");
         for(int i = 0; i < iBulletsArray.Length; i++)
         {
             if(!iBulletsArray[i].isMoving)
@@ -336,6 +340,8 @@ public class PlayerBehaviour : MonoBehaviour
         canShoot = false;
         deadScreen.SetActive(true);
         gameObject.SetActive(false);
+		SoundManager.PlaySound("Death3");
+
     }
     IEnumerator ShootDelay()
     {

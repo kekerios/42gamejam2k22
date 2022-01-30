@@ -39,6 +39,7 @@ public class EnemyGeneric : MonoBehaviour
         transform.rotation = Quaternion.Euler(new Vector3(0,0,0));
 		Debug.Log("Dead");
 		
+		SoundManager.PlaySound("EnemyDeath");
         isSpawning = false;
 	}
 
