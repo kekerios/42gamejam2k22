@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8484506171804822931}
   m_Layer: 0
   m_Name: EnemySpawner
-  m_TagString: Untagged
+  m_TagString: Spawner
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -43,3 +43,55 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0ddaf4aee99c48ab9cf886cecaaa60b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defEnemyWhite: {fileID: 1634766575258331610, guid: 35faec4f40f4842dc8e3032fd9bfe57b, type: 3}
+  kamiEnemyWhite: {fileID: 3302039364432796632, guid: af179d366d34a41449c8f29700388000, type: 3}
+  defEnemyBlack: {fileID: 3517611864834195049, guid: a01c3e7d0e25347c1b6bd20f5b06ddc3, type: 3}
+  kamiEnemyBlack: {fileID: 4174900147225503609, guid: ac52674e3d07e4467b6db73f5c4d63d5, type: 3}
+  enemyArrayDW:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  enemyArrayKW:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  enemyArrayDB:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  enemyArrayKB:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  parentE: {fileID: 0}
+  spawnRate: 1
+  currentW: 0
+  currentB: 0

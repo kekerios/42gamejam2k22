@@ -6,12 +6,14 @@ public class EnemyDefensive : EnemyGeneric
 {
 	private GameObject playerObject;
 	private Vector3 target;
+    private enemySpawnerScript enemySpawn;
     bool landingPhase,formationPhaseAxis;
     float random1,random2;
     int unUnoxD,unoRandomjaja;
 	// Start is called before the first frame update
-    void Start()
+    public override void Start()
     {
+        enemySpawn = GameObject.FindGameObjectWithTag("Spawner").GetComponent<enemySpawnerScript>();
         landingPhase=true;
         unUnoxD=(Random.Range(0,2));
         if(unUnoxD==1)
@@ -27,9 +29,8 @@ public class EnemyDefensive : EnemyGeneric
     // Update is called once per frame
     public void Update()
     {//                             MOVEMENT        Constant movement
-        if(!isSpawning)return;
-        else
-        Debug.Log(landingPhase);
+        if(!isSpawning || dead)return;
+        //Debug.Log(landingPhase);
         transform.Translate(target*speed*Time.deltaTime, Space.World);
         //                        MOVEMENT        The enemy falls from the sky 
         if(landingPhase==false)
@@ -44,11 +45,6 @@ public class EnemyDefensive : EnemyGeneric
                 target = new Vector3(1,0);
             }
         }
-        //                          ENEMY DEATH
-		if(life<=0) 
-		{
-			Death();
-		}
     }
 
     void OnTriggerExit2D(Collider2D other)
@@ -56,9 +52,24 @@ public class EnemyDefensive : EnemyGeneric
         if (other.tag == "Bound_Enemy")
         {
             landingPhase=false;
-            Debug.Log("I have collapsed with a bound");
+            //Debug.Log("I have collapsed with a bound");
             formationPhaseAxis=!formationPhaseAxis;
         }
+    }
+    public override void Death()
+    {
+        Debug.Log("Aaaaaaaaaaaaaaa");
+        if(isWhite)
+        {
+            enemySpawn.currentW -= 1;
+        }
+        else enemySpawn.currentB -= 1;
+        dead = true;
+		transform.localPosition = startingPos;
+        transform.rotation = Quaternion.Euler(new Vector3(0,0,0));
+		Debug.Log("Dead");
+		
+        isSpawning = false;
     }
 //                                  BULLET COLLIDER
 }

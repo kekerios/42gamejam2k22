@@ -6,19 +6,20 @@ using UnityEngine;
 public class EnemyGeneric : MonoBehaviour
 {
     public int life;
-	private int startingLife;
+	protected int startingLife;
     public float speed;
-    private Vector3 startingPos;
+    protected Vector3 startingPos;
     public bool isSpawning;
 	public bool isWhite;
+	protected bool dead = false;
     //                               ENEMY SHOOTING
     // public EnBullet bullet;
     // public EnBullet[] EnBullet;
     // Start is called before the first frame update
-    void Start()
+    public virtual void Start()
     {
         startingPos = transform.localPosition;
-		startingLife = life;
+		startingLife = 1;
 		isSpawning = false;
         //CreateBullets();
     }
@@ -27,16 +28,17 @@ public class EnemyGeneric : MonoBehaviour
     void Update()
     {
 
-        //                          ENEMY DEATH
     }
 
-	public void Death()
+	public virtual void Death()
 	{
     //                              ENEMY DEATH
-	    Debug.Log("Oh no! I have Died!");
+	    //Debug.Log("Oh no! I have Died!");
+		dead = true;
 		transform.localPosition = startingPos;
         transform.rotation = Quaternion.Euler(new Vector3(0,0,0));
-		life = startingLife;
+		Debug.Log("Dead");
+		
         isSpawning = false;
 	}
 
@@ -44,15 +46,15 @@ public class EnemyGeneric : MonoBehaviour
 //                                  BULLET COLLIDER
 	void OnTriggerEnter2D(Collider2D other)
 	{
-	    if (other.tag == "Bullet")
+	    /*if (other.tag == "Bullet")
 	    {
 	         //   Debug.Log("Oh no! I have been Shot");
 	        life--;
-			if(life<=0) 
+			if(life <= 0) 
 			{
 				Death();
 			}
-		}
+		}*/
 	    if (other.tag == "Player")
 	    {
 	         //   Debug.Log("Oh no! I have been Shot");

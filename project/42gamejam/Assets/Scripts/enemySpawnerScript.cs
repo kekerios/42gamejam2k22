@@ -17,6 +17,12 @@ public class enemySpawnerScript : MonoBehaviour
     public Transform parentE;
     private bool canSpawn = false;
     public float spawnRate = 1f;
+    private int enemyToSpawn = 0;
+
+    private int limitW = 10;
+    private int limitB = 10;
+    public int currentW = 0;
+    public int currentB = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -60,6 +66,7 @@ public class enemySpawnerScript : MonoBehaviour
     {
         yield return new WaitForSeconds(spawnRate);
         canSpawn = true;
+        Debug.Log("Waiting");
         DecideEnemy();
     }
     private void DecideEnemy()
@@ -67,36 +74,56 @@ public class enemySpawnerScript : MonoBehaviour
         int toSpawn = Random.Range(1, 5);
         if(toSpawn == 1)
         {
-            Spawn(enemyArrayDW);
+            //Spawn(enemyArrayDW);
+            //SpawnDW();
+            if(currentW >= limitW)
+            {
+                Generate(enemyArrayKW);
+            }
+            else {
+                Generate(enemyArrayDW);
+                currentW += 1;
+            }
         }
         else if(toSpawn == 2)
         {
-            Spawn(enemyArrayKW);
+            //Spawn(enemyArrayKW);
+            Generate(enemyArrayKW);
         }
         else if(toSpawn == 3)
         {
-            Spawn(enemyArrayDB);
+            
+            if(currentB >= limitB)
+            {
+                Generate(enemyArrayKB);
+            }
+            //Spawn(enemyArrayDB);
+            else {
+                Generate(enemyArrayDB);
+                currentB += 1;
+            }
         }
         else
         {
-            Spawn(enemyArrayKB);
+            //Spawn(enemyArrayKB);
+            //SpawnDW();
+            Generate(enemyArrayKB);
         }
     }
-    private void Spawn(EnemyGeneric[] enemyArray)
+    private void Generate(EnemyGeneric[] enemyArray)
     {
-        if(!canSpawn) return;
+        //if(!canSpawn)return;
         for(int i = 0; i < enemyArray.Length; i++)
         {
             if(!enemyArray[i].isSpawning)
             {
                 enemyArray[i].transform.position = transform.position;
-                //enemyArray[i].Spawn(new Vector3(0, 1, 0), 0f);
                 enemyArray[i].isSpawning = true;
+                enemyArray[i].life = 1;
                 canSpawn = false;
                 StartCoroutine(SpawnDelay());
+                return;
             }
         }
-
     }
-
 }

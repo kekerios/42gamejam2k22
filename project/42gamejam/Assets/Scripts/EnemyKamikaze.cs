@@ -9,31 +9,21 @@ public class EnemyKamikaze : EnemyGeneric
 	private Vector2 target;
 	private Vector2 position;
     // Start is called before the first frame update
-    void Start()
+    public override void Start()
     {
 		playerObject = GameObject.FindGameObjectWithTag("Player");
-		
     }
 
     // Update is called once per frame
     void Update()
     {
-		if(!isSpawning)return;
+		if(!isSpawning || dead)return;
 		else
 		{
 			target = playerObject.transform.position;
 			float step = speed * Time.deltaTime;
 			transform.position = Vector2.MoveTowards(transform.position, target, step); 
-			//                          ENEMY DEATH
-			if(life<=0) 
-			{
-				Death();
-				return;
-			}
 		}
-		
     }
-
-
 //                                  BULLET COLLIDER
 }
