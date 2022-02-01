@@ -7,47 +7,58 @@ using UnityEngine.SceneManagement;
 
 public class UI : MonoBehaviour
 {
-	private GameObject pausePanel;	
-
+	private GameObject pausePanel;
+	private GameObject deadPanel; 
+	private bool isPaused;
+	private bool isDead;
 
 	// Start is called before the first frame update
     void Start()
     {
 		pausePanel = GameObject.FindGameObjectWithTag("pausePanel");
+		deadPanel = GameObject.FindGameObjectWithTag("DeadPanel");
 		pausePanel.SetActive(false);
+		deadPanel.SetActive(false);
+		isPaused = false;
+		isDead = false;
 	}
 
     // Update is called once per frame
     void Update()
     {
-		if (Input.GetKeyDown(KeyCode.Escape))
+			
+	}
+
+	public void ShowPauseMenu()
+	{
+		if (!isPaused && !isDead)
 		{
-			showPauseMenu();
-		}	
+			pausePanel.SetActive(true);
+			isPaused = true;
+		}
+		else
+		{
+			pausePanel.SetActive(false);
+			isPaused = false;
+		}
 	}
-
-	public void showPauseMenu()
-	{
-		pausePanel.SetActive(true);	
-	}
-
-	public void hidePauseMenu()
-	{
-		pausePanel.SetActive(false);
-	}
-
-	public void loadMainMenu()
+	public void LoadMainMenu()
 	{
 		SceneManager.LoadScene("mainMenu");
 	}
 	
-	public void restartGame()
+	public void RestartGame()
 	{
 		SceneManager.LoadScene("SampleScene");
 	}
 	
-	public void quitGame()
+	public void QuitGame()
 	{
 		Application.Quit();
 	}
+	public void Die()
+    {
+		deadPanel.SetActive(true);
+		isDead = true;
+    }
 }

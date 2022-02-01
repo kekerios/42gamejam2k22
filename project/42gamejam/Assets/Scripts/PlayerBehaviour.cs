@@ -29,11 +29,11 @@ public class PlayerBehaviour : MonoBehaviour
     private bool canMoveR;
     private bool canMoveU;
     private bool canMoveD;
-    public GameObject deadScreen;
+    private UI ui;
     // Start is called before the first frame update
     void Start()
     {
-        deadScreen.SetActive(false);
+        ui = GameObject.FindGameObjectWithTag("UI").GetComponent<UI>();
         //iM = GameObject.FindGameObjectWithTag("InputManager").GetComponent<InputManager>();
         animator = GetComponentInChildren<Animator>();
         CreateBullets();
@@ -338,7 +338,7 @@ public class PlayerBehaviour : MonoBehaviour
     {
         speed = 0;
         canShoot = false;
-        deadScreen.SetActive(true);
+        ui.Die();
         gameObject.SetActive(false);
 		SoundManager.PlaySound("Death3");
 
@@ -350,23 +350,23 @@ public class PlayerBehaviour : MonoBehaviour
     }
     public void GetPowerUp(string power)
     {
-        if(power == "Triple")
+        switch (power)
         {
-            triShoot = true;
-        }
-        if(power == "Divide")
-        {
-            divideShoot = true;
-        }
-        if(power == "Life")
-        {
-            if(life >= 3) 
-            {
-                animator.SetTrigger("Full");
-                return;
-            }
-            life += 1;
-            speed = initialSpeed;
+            case "Triple":
+                triShoot = true;
+                break;
+            case "Divide":
+                divideShoot = true;
+                break;
+            case "Life":
+                if (life >= 3) return;
+                else
+                {
+                    life += 1;
+                    animator.SetTrigger("Full");
+                    speed = initialSpeed;
+                }
+                break;
         }
     }
 }

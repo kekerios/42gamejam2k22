@@ -9,6 +9,10 @@ TagManager:
   - pausePanel
   - Bound
   - Bound_Enemy
+  - Spawner
+  - Audio
+  - UI
+  - DeadPanel
   layers:
   - Default
   - TransparentFX

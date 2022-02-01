@@ -17,7 +17,7 @@ public class SoundManager : MonoBehaviour
         Death3 = Resources.Load<AudioClip> ("Death3");
         EnemyCollision = Resources.Load<AudioClip> ("EnemyCollision");
         EnemyDeath1 = Resources.Load<AudioClip> ("EnemyDeath1");
-		audioSrc = GetComponent<AudioSource> ();
+		audioSrc = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
